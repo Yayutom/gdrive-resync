@@ -61,7 +61,7 @@ err()  { printf '%s[fail]%s %s\n' "$RED" "$RST" "$*" >&2; }
 # an unrelated process that merely mentions "Google Drive" in its arguments.
 drive_pids() {
   ps -Axo pid=,comm= \
-    | grep -F "$APP_PATH" \
+    | grep -F "$APP_PATH/" \
     | grep -v ' grep' \
     | awk '{print $1}'
 }
@@ -73,7 +73,7 @@ show_status() {
     return 1
   fi
   ok "Google Drive is running:"
-  ps -Axo pid=,lstart=,comm= | grep -F "$APP_PATH" | grep -v ' grep' \
+  ps -Axo pid=,lstart=,comm= | grep -F "$APP_PATH/" | grep -v ' grep' \
     | sed "s|$APP_PATH/Contents/MacOS/||; s|$APP_PATH/Contents/||" \
     | sed 's/^/    /'
   return 0
